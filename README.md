@@ -1,4 +1,3 @@
-Absolutely! Here's a README description you can adapt for your CodePulse blog project on GitHub:
 
 **CodePulse Blog: A Hands-On ASP.NET Core 8 & Angular Learning Project**
 
