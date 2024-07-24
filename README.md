@@ -34,7 +34,7 @@ CodePulse is a training project designed to explore and solidify skills in full-
 
 2. **Clone Repository:**
    ```bash
-   git clone https://github.com/your-username/codepulse-blog.git
+   git clone https://github.com/hamedahmed100/CodePulse.git
    ```
 
 3. **Backend Setup:**
