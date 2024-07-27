@@ -11,9 +11,11 @@ namespace CodePulse.API.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly IBlogPostRepository blogPostRepository;
-        public BlogPostsController(IBlogPostRepository blogPostRepository)
+        private readonly ICategoryRepository categoryRepository;
+        public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             this.blogPostRepository = blogPostRepository;
+            this.categoryRepository = categoryRepository;
         }
 
 
@@ -32,8 +34,20 @@ namespace CodePulse.API.Controllers
                 IsVisible = request.IsVisible,
                 PublishedDate = request.PublishedDate,
                 ShortDescription = request.ShortDescription,
-                UrlHandle = request.UrlHandle
+                UrlHandle = request.UrlHandle,
+                Categories = new List<Category>()
             };
+
+            // Get all Guids from categories 
+
+            foreach (var categoryGuid in request.Categories)
+            {
+                var existingCategory = await categoryRepository.GetByIdAsync(categoryGuid);
+                if (existingCategory is not null)
+                {
+                    blogPost.Categories.Add(existingCategory);
+                }
+            }
 
             blogPost = await blogPostRepository.CreateAsync(blogPost);
 
@@ -49,7 +63,13 @@ namespace CodePulse.API.Controllers
                 IsVisible = blogPost.IsVisible,
                 PublishedDate = blogPost.PublishedDate,
                 ShortDescription = blogPost.ShortDescription,
-                UrlHandle = blogPost.UrlHandle
+                UrlHandle = blogPost.UrlHandle,
+                Categories = blogPost.Categories.Select( x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
 
             };
 
@@ -77,11 +97,28 @@ namespace CodePulse.API.Controllers
                     IsVisible = blogPost.IsVisible,
                     PublishedDate = blogPost.PublishedDate,
                     ShortDescription = blogPost.ShortDescription,
-                    UrlHandle = blogPost.UrlHandle
+                    UrlHandle = blogPost.UrlHandle,
+                     Categories = blogPost.Categories.Select(x => new CategoryDto
+                     {
+                         Id = x.Id,
+                         Name = x.Name,
+                         UrlHandle = x.UrlHandle,
+                     }).ToList()
                 });
             }
 
             return Ok(response);
         }
+
+        // GET: /api/blogposts/{id}
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetBlogPostById([FromRoute]int id)
+        {
+
+            // Get the blogPost from Repo
+        }
+
     }
 }
