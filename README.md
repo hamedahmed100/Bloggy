@@ -1,5 +1,5 @@
 
-**Bloggy:Is a Hands-On ASP.NET Core 8 & Angular Learning Project**
+**Bloggy: Is a Hands-On ASP.NET Core 8 & Angular Learning Project**
 
 CodePulse is a training project designed to explore and solidify skills in full-stack web development. This blog application empowers users to write and share their thoughts, accompanied by photos, while providing a robust backend for content management.
 
