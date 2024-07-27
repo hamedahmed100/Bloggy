@@ -6,6 +6,7 @@ import { BlogPost } from '../models/blog-post.model';
 import { Category } from '../../category/models/category.model';
 import { CategoryService } from '../../category/services/category.service';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
+import { ImageService } from 'src/app/shared/components/image-selector/image.service';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -22,11 +23,14 @@ export class EditBlogpostComponent implements OnInit,
   blogPost?: BlogPost;
   categories$?: Observable<Category[]>;
   selectedCategories?: string[];
+  isImageSelectorVisible: boolean = false;
+  imageSelectSubscription?: Subscription;
 
   constructor(private route: ActivatedRoute,
     private blogPostService: BlogPostService,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +50,16 @@ export class EditBlogpostComponent implements OnInit,
             }
           });
         }
+
+        this.imageSelectSubscription = this.imageService.onSelectedImage().subscribe({
+          next: (image) => {
+            if (this.blogPost) {
+              this.blogPost.featuredImageUrl = image.url;
+              this.isImageSelectorVisible = false;
+            }
+          }
+        })
+
       }
     });
   }
@@ -53,13 +67,13 @@ export class EditBlogpostComponent implements OnInit,
   onFormSubmit(): void {
     // convert model to request object
     if (this.blogPost && this.id) {
-      var updateBlogPost : UpdateBlogPost = {
+      var updateBlogPost: UpdateBlogPost = {
         author: this.blogPost.author,
         content: this.blogPost.content,
         shortDescription: this.blogPost.shortDescription,
         featuredImageUrl: this.blogPost.featuredImageUrl,
-        isVisible: this.blogPost.isVisible, 
-        publishedDate: this.blogPost.publishedDate, 
+        isVisible: this.blogPost.isVisible,
+        publishedDate: this.blogPost.publishedDate,
         title: this.blogPost.title,
         urlHandle: this.blogPost.urlHandle,
         categories: this.selectedCategories ?? []
@@ -83,10 +97,21 @@ export class EditBlogpostComponent implements OnInit,
         });
     }
   }
+
+  openImageSelector(): void {
+    this.isImageSelectorVisible = true;
+  }
+  closeImageSelector(): void {
+    this.isImageSelectorVisible = false;
+
+  }
+
+
   ngOnDestroy(): void {
     this.routeSubsription?.unsubscribe();
     this.updateBlogPostSubscription?.unsubscribe();
     this.getBlogPostSubscription?.unsubscribe();
     this.deleteBlogPostSubscription?.unsubscribe();
+    this.imageSelectSubscription?.unsubscribe();
   }
 }
