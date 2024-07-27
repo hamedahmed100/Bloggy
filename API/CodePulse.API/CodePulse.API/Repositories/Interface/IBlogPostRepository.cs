@@ -8,5 +8,6 @@ namespace CodePulse.API.Repositories.Interface
         public Task<IEnumerable<BlogPost>> GetAllAsync();
         public Task<BlogPost?> GetByIdAsync(Guid id);
         public Task<BlogPost?> UpdateAsync(BlogPost blogpost);
+        public Task<BlogPost?> DeleteAsync(Guid id);
     }
 }
