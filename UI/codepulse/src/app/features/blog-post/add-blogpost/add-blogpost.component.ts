@@ -45,7 +45,7 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
       next: (image) => {
         if (this.addBlogPost) {
           this.addBlogPost.featuredImageUrl = image.url;
-          this.isImageSelectorVisible = false;
+          this.closeImageSelector();
         }
       }
     })

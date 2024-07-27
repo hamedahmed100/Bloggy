@@ -55,7 +55,7 @@ export class EditBlogpostComponent implements OnInit,
           next: (image) => {
             if (this.blogPost) {
               this.blogPost.featuredImageUrl = image.url;
-              this.isImageSelectorVisible = false;
+              this.closeImageSelector();
             }
           }
         })
