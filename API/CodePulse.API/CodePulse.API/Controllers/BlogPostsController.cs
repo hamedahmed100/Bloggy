@@ -1,8 +1,10 @@
 ﻿using CodePulse.API.Models.Domain;
 using CodePulse.API.Models.DTO;
 using CodePulse.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CodePulse.API.Auxiliary;
 
 namespace CodePulse.API.Controllers
 {
@@ -12,6 +14,7 @@ namespace CodePulse.API.Controllers
     {
         private readonly IBlogPostRepository blogPostRepository;
         private readonly ICategoryRepository categoryRepository;
+
         public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             this.blogPostRepository = blogPostRepository;
@@ -22,6 +25,7 @@ namespace CodePulse.API.Controllers
 
         // POST: /api/blogposts
         [HttpPost]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestDto request)
         {
             // Convert DTO to domain model
@@ -150,7 +154,7 @@ namespace CodePulse.API.Controllers
 
         // GET: /api/blogposts/{urlHandle}
         [HttpGet]
-        [Route("{urlHandle}")]
+        [Route("{urlHandle}")] 
         public async Task<IActionResult> GetBlogPostByUrlHandle([FromRoute] string urlHandle )
         {
             // GET BlogPost details from repository
@@ -188,6 +192,7 @@ namespace CodePulse.API.Controllers
         // PUT: /api/blogposts/{id}
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public async Task<IActionResult> UpdateBlogPostById([FromRoute] Guid id, UpdateBlogPostRequestDto request)
         {
             // Convert from domain to DTO
@@ -250,6 +255,7 @@ namespace CodePulse.API.Controllers
         // DELETE: /api/blogPosts/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
         {
             var deletedBlogPost  = await blogPostRepository.DeleteAsync(id);

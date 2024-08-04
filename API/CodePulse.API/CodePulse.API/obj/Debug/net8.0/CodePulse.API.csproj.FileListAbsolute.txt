@@ -135,3 +135,10 @@ D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\
 D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net8.0\CodePulse.API.genruntimeconfig.cache
 D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net8.0\ref\CodePulse.API.dll
 D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net8.0\CodePuls.CA016005.Up2Date
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Hamed-lab\Developer\.Net - Angular\CodePulse\API\CodePulse.API\CodePulse.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

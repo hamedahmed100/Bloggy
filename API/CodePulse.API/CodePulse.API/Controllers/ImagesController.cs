@@ -1,6 +1,8 @@
-﻿using CodePulse.API.Models.Domain;
+﻿using CodePulse.API.Auxiliary;
+using CodePulse.API.Models.Domain;
 using CodePulse.API.Models.DTO;
 using CodePulse.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +19,7 @@ namespace CodePulse.API.Controllers
         }
         // POST: /api/images
         [HttpPost]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public  async Task<IActionResult> UploadImage([FromForm] IFormFile file,
             [FromForm] string fileName, [FromForm] string title)
         {

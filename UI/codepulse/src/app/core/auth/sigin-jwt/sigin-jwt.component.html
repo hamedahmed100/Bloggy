@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="mt-5">
+        <div class="col-12 col-md-6 col-lg-4 mx-auto">
+            <h1>Login</h1>
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" [(ngModel)]="signInRequest.email" name="email" class="form-control">
+                    <!-- |<div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="text-danger">
+                        Email is required
+                    </div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" [(ngModel)]="signInRequest.password" name="password" class="form-control" id="password" >
+                    <!-- <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="text-danger">
+                        Password is required
+                    </div> -->
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

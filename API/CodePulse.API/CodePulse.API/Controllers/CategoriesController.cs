@@ -1,7 +1,9 @@
-﻿using CodePulse.API.Data;
+﻿using CodePulse.API.Auxiliary;
+using CodePulse.API.Data;
 using CodePulse.API.Models.Domain;
 using CodePulse.API.Models.DTO;
 using CodePulse.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,8 +21,11 @@ namespace CodePulse.API.Controllers
         {
             this.categoryRepository = categoryRepository;
         }
-        // 
+
+
+        // POST: /api/categories
         [HttpPost]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto request)
         {
             // Map DTO to Domain Model
@@ -43,14 +48,21 @@ namespace CodePulse.API.Controllers
             return Ok(response);
         }
 
-        // GET: /api/categories
+        // GET: /api/categories?query=css&sortBy=name&sortDirection=asc
         [HttpGet]
-        public async Task<IActionResult> GetAllCategories()
+        public async Task<IActionResult> GetAllCategories(
+            [FromQuery] string? query,
+            [FromQuery] string? sortBy,
+            [FromQuery] string? sortDirection,
+            [FromQuery] int? pageNumber,
+            [FromQuery] int? pageSize)
         {
-            var catgories = await categoryRepository.GetAllAsync();
+            var catgories = await categoryRepository
+                .GetAllAsync(query, sortBy, sortDirection, pageNumber, pageSize);
 
             var responses = new List<CategoryDto>();
-            foreach (var category in catgories) {
+            foreach (var category in catgories)
+            {
                 responses.Add(new CategoryDto
                 {
                     Id = category.Id,
@@ -81,9 +93,19 @@ namespace CodePulse.API.Controllers
             };
             return Ok(response);
         }
+       
+        [HttpGet]
+        [Route("count")]
+        public async Task<IActionResult> getCount()
+        {
+            var count = await categoryRepository.getCount();
+            return Ok(count);
+        }
+        
         // PUT: /api/categories/{id}
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public async Task<IActionResult> EditCategory([FromRoute] Guid id, UpdateCategoryRequestDto request)
         {
             // Convert DTO to Domain Model
@@ -116,6 +138,7 @@ namespace CodePulse.API.Controllers
         // DELETE: /api/categories/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = nameof(ERoles.Writer))]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
         {
             var category = await categoryRepository.DeleteAsync(id);

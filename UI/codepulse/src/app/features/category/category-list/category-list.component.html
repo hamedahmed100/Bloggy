@@ -1,9 +1,13 @@
 <div class="container">
     <h1 class="mt-3">Category List</h1>
 
-    <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/admin/categories/add']" class="btn btn-primary">Add Category</a> 
+    <div class="d-flex justify-content-between mt-3">
+        <div class="d-flex">
+            <input type="text" class="form-control" #queryText>
+            <button class="btn btn-warning ms-3" (click)="onSearch(queryText.value)">Search</button>
+        </div>
 
+        <a [routerLink]="['/admin/categories/add']" class="btn btn-primary">Add Category</a>
     </div>
 
     <ng-container *ngIf="categories$ | async as categories">
@@ -11,8 +15,35 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Url Handler</th>
+                    <th>Name
+                        <span>
+                            <span>
+                                <button type="button" class="btn btn-light" (click)="sortCategories('name', 'asc')">
+                                    <i class="bi bi-arrow-up"></i>
+                                </button>
+                            </span>
+                            <span>
+                                <button type="button" class="btn btn-light" (click)="sortCategories('name', 'dsc')">
+                                    <i class="bi bi-arrow-down"></i>
+                                </button>
+                            </span>
+                        </span>
+                    </th>
+                    <th>
+                        Url Handler
+                        <span>
+                            <span>
+                                <button type="button" class="btn btn-light" (click)="sortCategories('url', 'asc')">
+                                    <i class="bi bi-arrow-up"></i>
+                                </button>
+                            </span>
+                            <span>
+                                <button type="button" class="btn btn-light" (click)="sortCategories('url', 'dsc')">
+                                    <i class="bi bi-arrow-down"></i>
+                                </button>
+                            </span>
+                        </span>
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,5 +58,23 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" [class.disabled]="pageNumber === 1">
+                  <a class="page-link" (click)="onPreviousPage()" [attr.disabled]="pageNumber === 1 ? true : null">Previous</a>
+                </li>
+              
+                <li *ngFor="let item of listPages; let i = index" class="page-item" [class.active]="pageNumber === i + 1">
+                  <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+                </li>
+              
+                <li class="page-item" [class.disabled]="pageNumber === pageCount">
+                  <a class="page-link" (click)="onNextPage()" [attr.disabled]="pageNumber === pageCount ? true : null">Next</a>
+                </li>
+              </ul>
+              
+        </nav>
     </ng-container>
 </div>
