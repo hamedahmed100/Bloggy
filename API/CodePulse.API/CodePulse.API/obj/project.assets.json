@@ -4424,9 +4424,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Hamed-lab\\Developer\\.Net - Angular\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
-      "projectName": "CodePulse.API",
-      "projectPath": "D:\\Hamed-lab\\Developer\\.Net - Angular\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
+      "projectUniqueName": "D:\\Hamed-lab\\Developer\\.Net - Angular\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\Bloggy.API.csproj",
+      "projectName": "Bloggy.API",
+      "projectPath": "D:\\Hamed-lab\\Developer\\.Net - Angular\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\Bloggy.API.csproj",
       "packagesPath": "C:\\Users\\hamed\\.nuget\\packages\\",
       "outputPath": "D:\\Hamed-lab\\Developer\\.Net - Angular\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\obj\\",
       "projectStyle": "PackageReference",

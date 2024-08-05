@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "Mp9rwYpGRGIia5HJdzL4GdsvWZPLYPhO7SdiPKOF7Bk=",
-  "Source": "CodePulse.API",
-  "BasePath": "_content/CodePulse.API",
+  "Hash": "6uY2N7+42v2CyiqWKt7fcU5704tTdXB30c5J7r0Gc5I=",
+  "Source": "Bloggy.API",
+  "BasePath": "_content/Bloggy.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
